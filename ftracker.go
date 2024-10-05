@@ -150,3 +150,4 @@ func SwimmingSpentCalories(lengthPool, countPool int, duration, weight, Swimming
     return spentCalories
     
 }
+////wtf
