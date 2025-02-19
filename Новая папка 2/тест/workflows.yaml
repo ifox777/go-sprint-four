@@ -1,0 +1,25 @@
+name: Mirror Repository
+
+on:
+  push:
+    branches:
+      - main  # Укажите ветку, которую вы хотите зеркалировать
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Mirror to remote repository
+      run: |
+        # Установите URL удаленного репозитория, куда нужно зеркалировать
+        REMOTE_REPO_URL="https://${GITHUB_ACTOR}:${{ secrets.MIRROR_REPO_TOKEN }}@github.com/your-username/your-repo.git"
+        
+        # Добавьте удаленный репозиторий
+        git remote add mirror "$REMOTE_REPO_URL"
+        
+        # Выполните принудительный пуш в удаленный репозиторий
+        git push --force mirror main  # Укажите ветку, которую вы хотите зеркалировать
